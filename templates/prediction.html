@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background:#f5f7fa;
+        }
+
+        .card{
+            border-radius:15px;
+        }
+
+        .symptom-box{
+            height:450px;
+            overflow-y:auto;
+            border:1px solid #ddd;
+            padding:15px;
+            border-radius:10px;
+            background:white;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary">
+<div class="container">
+
+<a class="navbar-brand" href="/">
+🏥 AI Disease Prediction
+</a>
+
+<div>
+
+<a href="/dashboard" class="btn btn-light me-2">
+Dashboard
+</a>
+
+<a href="/about" class="btn btn-warning me-2">
+About
+</a>
+
+<a href="/contact" class="btn btn-info text-white">
+Contact
+</a>
+
+</div>
+
+</div>
+</nav>
+
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2 class="text-center text-primary mb-4">
+Disease Prediction
+</h2>
+
+<form action="/predict" method="POST">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label class="form-label">
+Patient Name
+</label>
+
+<input
+type="text"
+name="name"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-4">
+
+<label class="form-label">
+Age
+</label>
+
+<input
+type="number"
+name="age"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-4">
+
+<label class="form-label">
+Gender
+</label>
+
+<select
+name="gender"
+class="form-select">
+
+<option value="Male">Male</option>
+
+<option value="Female">Female</option>
+
+<option value="Other">Other</option>
+
+</select>
+
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<h4 class="mb-3">
+Select Symptoms
+</h4>
+
+<div class="symptom-box">
+
+<div class="row">
+
+{% for symptom in symptoms %}
+
+<div class="col-md-4 mb-2">
+
+<div class="form-check">
+
+<input
+class="form-check-input"
+type="checkbox"
+name="symptoms"
+value="{{ symptom }}"
+id="{{ loop.index }}">
+
+<label
+class="form-check-label"
+for="{{ loop.index }}">
+
+{{ symptom.replace("_"," ").title() }}
+
+</label>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+<br>
+
+<button
+type="submit"
+class="btn btn-success w-100 btn-lg">
+
+🔍 Predict Disease
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
